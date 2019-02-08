@@ -31,7 +31,8 @@ from __future__ import print_function
 # section0, section1, section2, section3 = reports
 #######
 import random
-import os.path              
+import os.path  
+from importlib import reload            
     
 import example0, example1, example2, example3
 import example4, example5, example6, example7
@@ -41,8 +42,8 @@ import team10, team11, team12, team13, team14
 betray = example1
 collude = example0
 
-modules = [example0, example1, example2, example3, example4, example5, example6, example7,
-team0, team1, team2, team3, team4, team5, team6, team7, team8, team9, team10, 
+modules = [example0, example1, example2, example3, 
+team0, team1, team2, team3, team4, team5, team6, team7, team8, team9, example4, example5, example6, example7,team10,
 team11, team12, team13, team14]
 for module in modules:
     reload(module)
@@ -240,13 +241,13 @@ def make_section1(modules, scores):
     for index in range(len(modules)):
         section1 += 'vs. P' + str(index) + ' :'
         for i in range(len(modules)):
-            section1 += '{:>7}'.format(scores[i][index])
+            section1 += '{:>7}'.format(round(scores[i][index]))
         section1 += '\n'
 
     # Last line
     section1 += 'TOTAL  :'
     for index in range(len(modules)):
-        section1 += '{:>7}'.format(sum(scores[index]))     
+        section1 += '{:>7}'.format(round(sum(scores[index]))     )
     return section1+'\n'
     
 def make_section2(modules, scores):
@@ -268,9 +269,9 @@ def make_section2(modules, scores):
     for index in range(len(modules)):
         section2_list.append((modules[index].team_name,
                               'P'+str(index),
-                              str(sum(scores[index])/len(modules)),
+                              str(round(sum(scores[index]))/len(modules)),
                               str(modules[index].strategy_name)))
-    section2_list.sort(key=lambda x: int(x[2]), reverse=True)
+    section2_list.sort(key=lambda x: float(x[2]), reverse=True)
     
     # Generate one string per team
     # Rockettes (P1):  -500 points with Backstabber
