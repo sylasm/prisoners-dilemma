@@ -6,9 +6,9 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name ='that 1 guy'
-strategy_name = 'Blitzkrieg'
-strategy_description = 'betray evrytime besides after a betray'
+team_name = 'tit for tat' # Only 10 chars displayed.
+strategy_name = 'mimick'
+strategy_description = 'copies oponents move'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -17,14 +17,14 @@ def move(my_history, their_history, my_score, their_score):
     Make my move.
     Returns 'c' or 'b'. 
     '''
-    if 'b' in their_history[-1:]: # If the other player has betrayed within last round, 
-        return 'b'               # Betray.
-    elif len(their_history) >= 4:
-        if their_history[-1]=='c' and their_history[-2]=='c' and their_history[-3]=='c':
-        #if they callude 3 times conseulitvley
-            return 'b'                #betray
-    else: 
+    if len(my_history) ==0:
         return 'c'
+    elif 'b' in their_history[-1:]: # If the other player has betrayed within last round, 
+        return 'b'
+    elif 'c' in their_history[-1:]: # If the other player has caluded within last round, 
+        return 'c'
+        
+        
     # my_history: a string with one letter (c or b) per round that has been played with this opponent.
     # their_history: a string of the same length as history, possibly empty. 
     # The first round between these two players is my_history[0] and their_history[0].
